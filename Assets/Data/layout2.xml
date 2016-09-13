@@ -1,0 +1,11 @@
+<graphml xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml.html/1.0/ygraphml.xsd" xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:y="http://www.yworks.com/xml/yfiles-common/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yjs="http://www.yworks.com/xml/yfiles-for-html/1.0/xaml">
+<graph id="G" edgedefault="directed">
+<node id="node_1" x="0" y="0" z="0" group="1" name="Fran" status="Okay" type="Router" />
+<node id="node_2" x="50" y="50" z="50" group="1" name="Mauro" status="Okay" type="PseudoNode" />
+<node id="node_3" x="100" y="100" z="100" group="1" name="Diego" status="Okay" type="PseudoNode" />
+<node id="node_4" x="200" y="200" z="200" group="1" name="Thomas" status="Okay" type="PseudoNode" />
+<edge id="link_0" source="node_1" target="node_2" color="" label="1000" status="Up" type="Half" />
+<edge id="link_1" source="node_1" target="node_3" color="" label="1000" status="Up" type="Half" />
+<edge id="link_2" source="node_1" target="node_4" color="" label="1000" status="Up" type="Half" />
+</graph>
+</graphml>
