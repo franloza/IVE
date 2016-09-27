@@ -38,6 +38,7 @@ namespace Topology {
 		private GUIText nodeCountText;
 		private GUIText linkCountText;
 
+        /*
 		//Method for loading the GraphML layout file
 		private IEnumerator LoadLayout(){
 
@@ -127,6 +128,54 @@ namespace Topology {
 				link.target = nodes[link.targetId] as Node;
 			}
 		}
+        */
+
+        void GenerateGraph(int numNodes, int minDegree, int maxDegree, float scale)
+        {
+            nodes.Clear();
+            links.Clear();
+
+            for (int i = 0; i < numNodes; ++i)
+            {
+                Vector3 randPoint = Random.insideUnitSphere * scale;
+                Node nodeObject = Instantiate(nodePrefab, randPoint, Quaternion.identity) as Node;
+
+                nodeObject.id = i;
+
+                Color red = new Color(1, 0, 0);
+                if (i % 2 == 0)
+                    nodeObject.GetComponent<Renderer>().material.color = red;
+
+                nodes.Add(nodeObject.id, nodeObject);
+            }
+
+            // Loop over first half of nodes
+            for (int i = 0; i < numNodes / 2; ++i)
+            {
+                int degree = Random.Range(minDegree, maxDegree);
+                for (int j = 0; j < degree; ++j)
+                {
+                    // Connect to randomly to a node from the second half
+                    int randomNode = Random.Range(numNodes / 2, numNodes - 1);
+
+                    Link linkObject = Instantiate(linkPrefab, new Vector3(0, 0, 0), Quaternion.identity) as Link;
+                    linkObject.id = (i * maxDegree + j);
+                    linkObject.source = nodes[i] as Node;
+                    linkObject.target = nodes[randomNode] as Node;
+
+                    //print("source: " + (!!linkObject.source) + ", target: " + (!!linkObject.target));
+
+                    links.Add(linkObject.id, linkObject);
+                }
+            }
+        }
+
+        private IEnumerator GenerateTestGraph()
+        {
+            GenerateGraph(30, 2, 5, 100.0f);
+
+            yield return true;
+        }
 
 		void Start () {
 			nodes = new Hashtable();
@@ -140,8 +189,13 @@ namespace Topology {
 			statusText = GameObject.Find("StatusText").GetComponent<GUIText>();
 			statusText.text = "";
 
-			StartCoroutine( LoadLayout() );
+			StartCoroutine( GenerateTestGraph() );
 		}
+
+        void Update()
+        {
+            //statusText.text = Camera.main.transform.position.ToString();
+        }
 
 	}
 

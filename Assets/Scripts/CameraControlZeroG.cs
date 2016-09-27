@@ -28,15 +28,10 @@ public class CameraControlZeroG : MonoBehaviour {
 	public GUIText movementSpeed;
 
 	private Vector3 move = new Vector3();
-	private Vector3 cluster1 = new Vector3(1960, 1791, 2726);
-	private Vector3 cluster2 = new Vector3(2042, 1579, 4254);
-	private Vector3 cluster3 = new Vector3(2692, 81, 2526);
-	private Vector3 cluster4 = new Vector3(531, 2317, 3776);
-	private Vector3 cluster5 = new Vector3(-587, 2043, 2194);
 
 	void Start(){
 		//set to first cluster position
-		transform.position = cluster1;
+		transform.position = new Vector3(0, 0, -200);
 	}
 	
 	void Update () {
@@ -62,6 +57,7 @@ public class CameraControlZeroG : MonoBehaviour {
 		move = transform.TransformDirection(move);
 		transform.position += move;
 
+        /*
 		//set warp to cluster controls
 		if(Input.GetKey("1")){
 			transform.position = cluster1;
@@ -82,5 +78,6 @@ public class CameraControlZeroG : MonoBehaviour {
 		if(Input.GetKey("5")){
 			transform.position = cluster5;
 		}
+        */
 	}
 }

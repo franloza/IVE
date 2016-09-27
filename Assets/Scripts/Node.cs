@@ -25,7 +25,7 @@ namespace Topology {
 
 	public class Node : MonoBehaviour {
 
-		public string id;
+		public int id;
 
 		void Update () {
             // Rotate towards camera.
