@@ -26,12 +26,12 @@ namespace Topology {
 	public class Node : MonoBehaviour {
 
 		public string id;
-		public TextMesh nodeText;
 
 		void Update () {
-			//node text always facing camera
-			nodeText.transform.LookAt (Camera.main.transform);
-		}
-	}
+            // Rotate towards camera.
+            this.transform.LookAt(Camera.main.transform);
+            this.transform.Rotate(Camera.main.transform.up, 180.0f, Space.World);
+        }
+    }
 
 }

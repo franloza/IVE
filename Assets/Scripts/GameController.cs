@@ -65,10 +65,10 @@ namespace Topology {
 			int scale = 2;
 
 			XmlElement root = xmlDoc.FirstChild as XmlElement;
-			for(int i=0; i<root.ChildNodes.Count; i++){
+			for(int i=0; i<root.ChildNodes.Count; i++) {
 				XmlElement xmlGraph = root.ChildNodes[i] as XmlElement;
 
-				for(int j=0; j<xmlGraph.ChildNodes.Count; j++){
+				for(int j=0; j<xmlGraph.ChildNodes.Count; j++) {
 					XmlElement xmlNode = xmlGraph.ChildNodes[j] as XmlElement;
 
 					//create nodes
@@ -78,9 +78,14 @@ namespace Topology {
 						float z = float.Parse(xmlNode.Attributes["z"].Value)/scale;
 
 						Node nodeObject = Instantiate(nodePrefab, new Vector3(x,y,z), Quaternion.identity) as Node;
-						nodeObject.nodeText.text = xmlNode.Attributes["name"].Value;
+						//nodeObject.nodeText.text = xmlNode.Attributes["name"].Value;
 
 						nodeObject.id = xmlNode.Attributes["id"].Value;
+
+                        Color red = new Color(1, 0, 0);
+                        if (j % 2 == 0)
+                            nodeObject.GetComponent<Renderer>().material.color = red;
+
 						nodes.Add(nodeObject.id, nodeObject);
 
 						statusText.text = "Loading Topology: Node " + nodeObject.id;
