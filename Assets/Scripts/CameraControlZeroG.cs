@@ -25,7 +25,6 @@ using System.Collections;
 public class CameraControlZeroG : MonoBehaviour {
 
 	public float speed = 5f;
-	public GUIText movementSpeed;
 
 	private Vector3 move = new Vector3();
 
@@ -52,32 +51,21 @@ public class CameraControlZeroG : MonoBehaviour {
 		if (speed < 5)
 			speed = 5;
 
-		movementSpeed.text = "Move Speed: " + speed;
-
 		move = transform.TransformDirection(move);
 		transform.position += move;
 
-        /*
-		//set warp to cluster controls
-		if(Input.GetKey("1")){
-			transform.position = cluster1;
-		}
-
-		if(Input.GetKey("2")){
-			transform.position = cluster2;
-		}
-
-		if(Input.GetKey("3")){
-			transform.position = cluster3;
-		}
-
-		if(Input.GetKey("4")){
-			transform.position = cluster4;
-		}
-
-		if(Input.GetKey("5")){
-			transform.position = cluster5;
-		}
-        */
-	}
+        //Set key to activate visual reduction
+        if (Input.GetKeyDown("1"))
+        {
+            Canvas visualReduction = GameObject.Find("VisualReduction").GetComponent<Canvas>();
+            if (visualReduction.isActiveAndEnabled)
+            {
+                visualReduction.enabled = false;
+            }
+            else
+            {
+                visualReduction.enabled = true;
+            }
+        }
+    }
 }

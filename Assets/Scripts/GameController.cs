@@ -27,6 +27,9 @@ namespace Topology {
 
 	public class GameController : MonoBehaviour {
 
+        //Maximum time for each level
+        private const float MAX_TIME = 10f;
+
 		public Node nodePrefab;
 		public Link linkPrefab;
 
@@ -37,6 +40,12 @@ namespace Topology {
 		private int linkCount = 0;
 		private GUIText nodeCountText;
 		private GUIText linkCountText;
+        private GUIText timerText;
+
+        private Canvas visualReduction;
+
+        //Countdown timer 
+        private float timeLeft;
 
         /*
 		//Method for loading the GraphML layout file
@@ -188,15 +197,25 @@ namespace Topology {
 			linkCountText.text = "Edges: 0";
 			statusText = GameObject.Find("StatusText").GetComponent<GUIText>();
 			statusText.text = "";
+            visualReduction = GameObject.Find("VisualReduction").GetComponent<Canvas>();
+            visualReduction.enabled = false;
+            timerText = GameObject.Find("Timer").GetComponent<GUIText>();
+            timerText.text = "Time: " + MAX_TIME;
+            timeLeft = MAX_TIME;
 
-			StartCoroutine( GenerateTestGraph() );
+            StartCoroutine( GenerateTestGraph() );
 		}
 
         void Update()
         {
+            timeLeft -= Time.deltaTime;
+            timerText.text = "Time: " + timeLeft.ToString("0.00");
+
+            //Reset the graph if time is over
+            if(timeLeft < 0.001) Start();
+
             //statusText.text = Camera.main.transform.position.ToString();
         }
-
 	}
 
 }
