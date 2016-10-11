@@ -26,7 +26,7 @@ public class CameraControlZeroG : MonoBehaviour {
 
 	public float speed = 5f;
 
-	private Vector3 move = new Vector3();
+	//private Vector3 move = new Vector3();
 
 	void Start(){
 		//set to first cluster position
@@ -34,6 +34,8 @@ public class CameraControlZeroG : MonoBehaviour {
 	}
 	
 	void Update () {
+
+        /*
 		move.x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 		move.z = Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
@@ -41,6 +43,7 @@ public class CameraControlZeroG : MonoBehaviour {
 		if (Input.GetKey ("space")) {
 			move.y = speed * Time.deltaTime;
 		}
+
 
 		if (Input.GetKey ("left ctrl")) {
 			move.y = -speed * Time.deltaTime;
@@ -52,20 +55,6 @@ public class CameraControlZeroG : MonoBehaviour {
 			speed = 5;
 
 		move = transform.TransformDirection(move);
-		transform.position += move;
-
-        //Set key to activate visual reduction
-        if (Input.GetKeyDown("1"))
-        {
-            Canvas visualReduction = GameObject.Find("VisualReduction").GetComponent<Canvas>();
-            if (visualReduction.isActiveAndEnabled)
-            {
-                visualReduction.enabled = false;
-            }
-            else
-            {
-                visualReduction.enabled = true;
-            }
-        }
+		transform.position += move;*/
     }
 }

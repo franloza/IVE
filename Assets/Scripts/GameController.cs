@@ -20,32 +20,36 @@
 
 using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Experiment;
 using System.Xml;
 using System.IO;
+using System;
+using System.Text;
 
 namespace Topology {
 
-	public class GameController : MonoBehaviour {
+    public class GameController : MonoBehaviour, ExperimentObserver
+    {
 
-        //Maximum time for each level
-        private const float MAX_TIME = 10f;
+        public Experiment exp;
 
-		public Node nodePrefab;
-		public Link linkPrefab;
+        public Node nodePrefab;
+        public Link linkPrefab;
 
-		private Hashtable nodes;
-		private Hashtable links;
-		private GUIText statusText;
-		private int nodeCount = 0;
-		private int linkCount = 0;
-		private GUIText nodeCountText;
-		private GUIText linkCountText;
+        private Hashtable nodes;
+        private Hashtable links;
+        private int nodeCount = 0;
+        private int linkCount = 0;
+
+        private GUIText statusText;
+        private GUIText nodeCountText;
+        private GUIText linkCountText;
         private GUIText timerText;
-
+        private GUIText instructions;
+        private GUIText warpKeys;
         private Canvas visualReduction;
 
-        //Countdown timer 
-        private float timeLeft;
+
 
         /*
 		//Method for loading the GraphML layout file
@@ -139,6 +143,8 @@ namespace Topology {
 		}
         */
 
+        //TODO: Method to generate new random graph (Reset)
+        //TODO: Include complexity (1..3) as parameter
         void GenerateGraph(int numNodes, int minDegree, int maxDegree, float scale)
         {
             nodes.Clear();
@@ -146,7 +152,7 @@ namespace Topology {
 
             for (int i = 0; i < numNodes; ++i)
             {
-                Vector3 randPoint = Random.insideUnitSphere * scale;
+                Vector3 randPoint = UnityEngine.Random.insideUnitSphere * scale;
                 Node nodeObject = Instantiate(nodePrefab, randPoint, Quaternion.identity) as Node;
 
                 nodeObject.id = i;
@@ -161,11 +167,11 @@ namespace Topology {
             // Loop over first half of nodes
             for (int i = 0; i < numNodes / 2; ++i)
             {
-                int degree = Random.Range(minDegree, maxDegree);
+                int degree = UnityEngine.Random.Range(minDegree, maxDegree);
                 for (int j = 0; j < degree; ++j)
                 {
                     // Connect to randomly to a node from the second half
-                    int randomNode = Random.Range(numNodes / 2, numNodes - 1);
+                    int randomNode = UnityEngine.Random.Range(numNodes / 2, numNodes - 1);
 
                     Link linkObject = Instantiate(linkPrefab, new Vector3(0, 0, 0), Quaternion.identity) as Link;
                     linkObject.id = (i * maxDegree + j);
@@ -186,36 +192,128 @@ namespace Topology {
             yield return true;
         }
 
-		void Start () {
-			nodes = new Hashtable();
-			links = new Hashtable();
-
-			//initial stats
-			nodeCountText = GameObject.Find("NodeCount").GetComponent<GUIText>();
-			nodeCountText.text = "Nodes: 0";
-			linkCountText = GameObject.Find("LinkCount").GetComponent<GUIText>();
-			linkCountText.text = "Edges: 0";
-			statusText = GameObject.Find("StatusText").GetComponent<GUIText>();
-			statusText.text = "";
+        void Start()
+        {
+            //Initiate GUI and components
+            nodes = new Hashtable();
+            links = new Hashtable();
+            exp = new Experiment();
+            nodeCountText = GameObject.Find("NodeCount").GetComponent<GUIText>();
+            linkCountText = GameObject.Find("LinkCount").GetComponent<GUIText>();
+            statusText = GameObject.Find("StatusText").GetComponent<GUIText>();
             visualReduction = GameObject.Find("VisualReduction").GetComponent<Canvas>();
-            visualReduction.enabled = false;
+            instructions = GameObject.Find("Instructions").GetComponent<GUIText>();
+            warpKeys = GameObject.Find("WarpKeys").GetComponent<GUIText>();
             timerText = GameObject.Find("Timer").GetComponent<GUIText>();
-            timerText.text = "Time: " + MAX_TIME;
-            timeLeft = MAX_TIME;
 
-            StartCoroutine( GenerateTestGraph() );
-		}
+            //Subscribe to the experiment
+            exp.subscribe(this);
+        }
 
         void Update()
         {
-            timeLeft -= Time.deltaTime;
-            timerText.text = "Time: " + timeLeft.ToString("0.00");
+            //Left click - Positive answer
+            if (Input.GetMouseButtonDown(0)) exp.answer(true);
+            //Right click - Negative answer
+            else if (Input.GetMouseButtonDown(1)) exp.answer(false);
 
-            //Reset the graph if time is over
-            if(timeLeft < 0.001) Start();
+            else if (Input.GetKeyDown("space"))
+            {
+                if (exp.Finished) exp.reset();
+                else if (exp.Paused) exp.start();
+            }
 
-            //statusText.text = Camera.main.transform.position.ToString();
+            exp.update();
         }
-	}
+
+        //Events
+        public void onStageChange(float timeEmployed, float headMovement, bool correctAnswer)
+        {
+            Log("\tTime employed:", timeEmployed.ToString("0.0000"));
+            Log("\tHead movement:", headMovement.ToString("0.0000"));
+            Log("\tCorrect anwser:", correctAnswer);
+            statusText.text = "Stage " + exp.Stage;
+            instructions.text = "";
+            warpKeys.text = "";
+        }
+
+        public void onChallengeChange(float timeEmployed, float headMovement, bool correctAnswer)
+        {
+            Log("\tTime employed:", timeEmployed.ToString("0.0000"));
+            Log("\tHead movement:", headMovement.ToString("0.0000"));
+            Log("\tCorrect anwser:", correctAnswer);
+            warpKeys.text = "Stage " + exp.Stage + " - Challenge " + exp.Challenge;
+            timerText.text = "Time: " + exp.TimeLeft.ToString("0.00");
+            Log("Stage", exp.Stage, "Challenge", exp.Challenge, ":");
+            StartCoroutine(GenerateTestGraph());
+        }
+
+        public void onFinish(float timeEmployed, float headMovement, bool correctAnswer)
+        {
+            Log("\tTime employed:", timeEmployed.ToString("0.0000"));
+            Log("\tHead movement:", headMovement.ToString("0.0000"));
+            Log("\tCorrect anwser:", correctAnswer);
+            nodeCountText.text = "";
+            linkCountText.text = "";
+            statusText.text = "Experiment finished";
+            visualReduction.enabled = exp.VisualReduction ? true : false;
+            timerText.text = "";
+            warpKeys.text = "";
+            instructions.text = "Press space to start new experiment";
+            Log("Experiment finished at", DateTime.Now,"\n");
+        }
+
+        public void onStart()
+        {
+            int complexity = exp.Challenge;
+            statusText.text = "";
+            warpKeys.text = "Stage " + exp.Stage + " - Challenge " + exp.Challenge;
+            instructions.text = "";
+            visualReduction.enabled = exp.VisualReduction ? true : false;
+            //Creates the graph
+            //TODO: Add complexity. Graph complexity == Challenge number
+            StartCoroutine(GenerateTestGraph());
+            Log("Stage",exp.Stage,"Challenge",exp.Challenge,":");
+        }
+
+        public void onReset()
+        {
+            //Reset the GUI
+            nodeCountText.text = "";
+            linkCountText.text = "";
+            statusText.text = "Graph Visualization Experiment";
+            visualReduction.enabled = exp.VisualReduction ? true : false;
+            timerText.text = "Time: " + exp.TimeLeft.ToString("0.00");
+            warpKeys.text = "";
+            instructions.text = "Press space to start";
+
+            Log("Experiment started at", DateTime.Now);
+        }
+
+        public void onUpdate()
+        {
+            timerText.text = "Time: " + exp.TimeLeft.ToString("0.00");
+        }
+
+        public void onSubscribe()
+        {
+            onReset();
+        }
+
+        public void onUnsubscribe()
+        {
+            throw new NotImplementedException();
+        }
+
+        private String Log (params object[] data)
+        {
+            return ExperimentLogger.Log(data);
+        }
+
+        public void onAnswer()
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 }
