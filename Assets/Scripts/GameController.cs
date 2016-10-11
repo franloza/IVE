@@ -213,9 +213,9 @@ namespace Topology {
         void Update()
         {
             //Left click - Positive answer
-            if (Input.GetMouseButtonDown(0)) exp.answer(true);
+            if (Input.GetMouseButtonDown(0) && !exp.Paused) exp.answer(true);
             //Right click - Negative answer
-            else if (Input.GetMouseButtonDown(1)) exp.answer(false);
+            else if (Input.GetMouseButtonDown(1) && !exp.Paused) exp.answer(false);
 
             else if (Input.GetKeyDown("space"))
             {
@@ -229,9 +229,6 @@ namespace Topology {
         //Events
         public void onStageChange(float timeEmployed, float headMovement, bool correctAnswer)
         {
-            Log("\tTime employed:", timeEmployed.ToString("0.0000"));
-            Log("\tHead movement:", headMovement.ToString("0.0000"));
-            Log("\tCorrect anwser:", correctAnswer);
             statusText.text = "Stage " + exp.Stage;
             instructions.text = "";
             warpKeys.text = "";
@@ -239,20 +236,13 @@ namespace Topology {
 
         public void onChallengeChange(float timeEmployed, float headMovement, bool correctAnswer)
         {
-            Log("\tTime employed:", timeEmployed.ToString("0.0000"));
-            Log("\tHead movement:", headMovement.ToString("0.0000"));
-            Log("\tCorrect anwser:", correctAnswer);
             warpKeys.text = "Stage " + exp.Stage + " - Challenge " + exp.Challenge;
             timerText.text = "Time: " + exp.TimeLeft.ToString("0.00");
-            Log("Stage", exp.Stage, "Challenge", exp.Challenge, ":");
             StartCoroutine(GenerateTestGraph());
         }
 
         public void onFinish(float timeEmployed, float headMovement, bool correctAnswer)
         {
-            Log("\tTime employed:", timeEmployed.ToString("0.0000"));
-            Log("\tHead movement:", headMovement.ToString("0.0000"));
-            Log("\tCorrect anwser:", correctAnswer);
             nodeCountText.text = "";
             linkCountText.text = "";
             statusText.text = "Experiment finished";
@@ -260,7 +250,6 @@ namespace Topology {
             timerText.text = "";
             warpKeys.text = "";
             instructions.text = "Press space to start new experiment";
-            Log("Experiment finished at", DateTime.Now,"\n");
         }
 
         public void onStart()
@@ -273,7 +262,6 @@ namespace Topology {
             //Creates the graph
             //TODO: Add complexity. Graph complexity == Challenge number
             StartCoroutine(GenerateTestGraph());
-            Log("Stage",exp.Stage,"Challenge",exp.Challenge,":");
         }
 
         public void onReset()
@@ -286,8 +274,6 @@ namespace Topology {
             timerText.text = "Time: " + exp.TimeLeft.ToString("0.00");
             warpKeys.text = "";
             instructions.text = "Press space to start";
-
-            Log("Experiment started at", DateTime.Now);
         }
 
         public void onUpdate()
@@ -303,11 +289,6 @@ namespace Topology {
         public void onUnsubscribe()
         {
             throw new NotImplementedException();
-        }
-
-        private String Log (params object[] data)
-        {
-            return ExperimentLogger.Log(data);
         }
 
         public void onAnswer()

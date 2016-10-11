@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Assets.Scripts.Experiment;
 
 namespace Assets.Scripts.Experiment
 {
@@ -103,6 +104,19 @@ namespace Assets.Scripts.Experiment
             }
         }
 
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+
+            private set
+            {
+                _id = value;
+            }
+        }
+
         //PUBLIC METHODS
         public void update()
         {
@@ -135,15 +149,19 @@ namespace Assets.Scripts.Experiment
             this.TimeLeft = MaxTime;
             this.Finished = false;
             this.Paused = true;
+            this.Id = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; 
             _answer = ExperimentAnswer.NO_ANSWER;
             foreach (ExperimentObserver obs in this._observers) { obs.onReset(); }
         }
 
         public void answer(bool answer)
         {
-            if (answer) _answer = ExperimentAnswer.POSITIVE;
-            else _answer = ExperimentAnswer.NEGATIVE;
-            nextChallenge();
+            //if (!Paused && !Finished)
+            //{
+                if (answer) _answer = ExperimentAnswer.POSITIVE;
+                else _answer = ExperimentAnswer.NEGATIVE;
+                nextChallenge();
+            //}
         }
 
         public void subscribe(ExperimentObserver obs)
@@ -182,6 +200,9 @@ namespace Assets.Scripts.Experiment
             float headMovement = 0f;
             bool correctAnswer = (_answer == ExperimentAnswer.NO_ANSWER)?false:true; //Check if the given answer is correct
 
+            //Log results
+            ExperimentLogger.Log(this.Id,this.Stage,this.Challenge,time,headMovement,correctAnswer);
+
             this.Paused = true;
             this.Challenge++;
             
@@ -200,6 +221,7 @@ namespace Assets.Scripts.Experiment
         }
 
         //ATTRIBUTES
+        private int _id;
         //Stage number (1..3)
         private int _stage;
         //Challenge number (1..3)
@@ -214,6 +236,5 @@ namespace Assets.Scripts.Experiment
         private ExperimentAnswer _answer;
         //List of observers
         private List<ExperimentObserver> _observers = new List<ExperimentObserver>();
-
     }
 }
