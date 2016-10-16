@@ -49,106 +49,28 @@ namespace Topology {
         private GUIText warpKeys;
         private Canvas visualReduction;
 
+        void ClearGraph()
+        {
+            foreach (Node node in nodes.Values)
+            {
+                Destroy(node.gameObject);
+            }
 
+            foreach (Link link in links.Values)
+            {
+                Destroy(link.gameObject);
+            }
 
-        /*
-		//Method for loading the GraphML layout file
-		private IEnumerator LoadLayout(){
-
-			string sourceFile = Application.dataPath + "/Data/layout.xml";
-			statusText.text = "Loading file: " + sourceFile;
-
-			//determine which platform to load for
-			string xml = null;
-			if(Application.isWebPlayer){
-				WWW www = new WWW (sourceFile);
-				yield return www;
-				xml = www.text;
-			}
-			else{
-				StreamReader sr = new StreamReader(sourceFile);
-				xml = sr.ReadToEnd();
-				sr.Close();
-			}
-
-			XmlDocument xmlDoc = new XmlDocument();
-			xmlDoc.LoadXml(xml);
-
-			statusText.text = "Loading Topology";
-
-			int scale = 2;
-
-			XmlElement root = xmlDoc.FirstChild as XmlElement;
-			for(int i=0; i<root.ChildNodes.Count; i++) {
-				XmlElement xmlGraph = root.ChildNodes[i] as XmlElement;
-
-				for(int j=0; j<xmlGraph.ChildNodes.Count; j++) {
-					XmlElement xmlNode = xmlGraph.ChildNodes[j] as XmlElement;
-
-					//create nodes
-					if(xmlNode.Name == "node"){
-						float x = float.Parse(xmlNode.Attributes["x"].Value)/scale;
-						float y = float.Parse (xmlNode.Attributes["y"].Value)/scale;
-						float z = float.Parse(xmlNode.Attributes["z"].Value)/scale;
-
-						Node nodeObject = Instantiate(nodePrefab, new Vector3(x,y,z), Quaternion.identity) as Node;
-						//nodeObject.nodeText.text = xmlNode.Attributes["name"].Value;
-
-						nodeObject.id = xmlNode.Attributes["id"].Value;
-
-                        Color red = new Color(1, 0, 0);
-                        if (j % 2 == 0)
-                            nodeObject.GetComponent<Renderer>().material.color = red;
-
-						nodes.Add(nodeObject.id, nodeObject);
-
-						statusText.text = "Loading Topology: Node " + nodeObject.id;
-						nodeCount++;
-						nodeCountText.text = "Nodes: " + nodeCount;
-					}
-
-					//create links
-					if(xmlNode.Name == "edge"){
-						Link linkObject = Instantiate(linkPrefab, new Vector3(0,0,0), Quaternion.identity) as Link;
-						linkObject.id = xmlNode.Attributes["id"].Value;
-						linkObject.sourceId = xmlNode.Attributes["source"].Value;
-						linkObject.targetId = xmlNode.Attributes["target"].Value;
-						linkObject.status = xmlNode.Attributes["status"].Value;
-						links.Add(linkObject.id, linkObject);
-
-						statusText.text = "Loading Topology: Edge " + linkObject.id;
-						linkCount++;
-						linkCountText.text = "Edges: " + linkCount;
-					}
-
-					//every 100 cycles return control to unity
-					if(j % 100 == 0)
-						yield return true;
-				}
-			}
-
-			//map node edges
-			MapLinkNodes();
-
-			statusText.text = "";
-		}
-
-		//Method for mapping links to nodes
-		private void MapLinkNodes(){
-			foreach(string key in links.Keys){
-				Link link = links[key] as Link;
-				link.source = nodes[link.sourceId] as Node;
-				link.target = nodes[link.targetId] as Node;
-			}
-		}
-        */
+            nodes.Clear();
+            links.Clear();
+        }
 
         //TODO: Method to generate new random graph (Reset)
         //TODO: Include complexity (1..3) as parameter
         void GenerateGraph(int numNodes, int minDegree, int maxDegree, float scale)
         {
-            nodes.Clear();
-            links.Clear();
+            ClearGraph();
+            
 
             for (int i = 0; i < numNodes; ++i)
             {
