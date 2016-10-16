@@ -14,7 +14,7 @@ namespace Assets.Scripts.Experiment
 
         //CONSTANTS
         //Maximum time for each level (seconds)
-        private readonly float[] MAX_TIME  = { 5f, 7f, 10f };
+        private readonly float[] MAX_TIME  = { 50f, 70f, 100f };
 
         //CONSTRUCTOR
         public Experiment()
