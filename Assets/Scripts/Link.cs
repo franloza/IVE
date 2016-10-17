@@ -40,7 +40,7 @@ namespace Topology {
 			// Properties
 			Color c = Color.white;
 			c.a = 1.0f;
-            float w = 0.5f;
+            float w = 1;
 
 			//draw line
 			lineRenderer.material = new Material (Shader.Find("Self-Illumin/Diffuse"));

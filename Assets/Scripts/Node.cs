@@ -27,7 +27,14 @@ namespace Topology {
 
 		public int id;
 
-		void Update () {
+        void Start()
+        {
+            // Properties
+            float scale = 5;
+            this.transform.localScale = new Vector3(scale, scale, scale);
+        }
+
+        void Update () {
             // Rotate towards camera.
             this.transform.LookAt(Camera.main.transform);
             this.transform.Rotate(Camera.main.transform.up, 180.0f, Space.World);

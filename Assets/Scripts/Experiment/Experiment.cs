@@ -14,7 +14,7 @@ namespace Assets.Scripts.Experiment
 
         //CONSTANTS
         //Maximum time for each level (seconds)
-        private readonly float[] MAX_TIME  = { 50f, 70f, 100f };
+        private readonly float[] MAX_TIME  = { 10f, 20f, 30f };
 
         //CONSTRUCTOR
         public Experiment()
@@ -117,6 +117,19 @@ namespace Assets.Scripts.Experiment
             }
         }
 
+        public bool Solution
+        {
+            get
+            {
+                return _solution;
+            }
+
+            set
+            {
+                _solution = value;
+            }
+}
+
         //PUBLIC METHODS
         public void update()
         {
@@ -183,11 +196,11 @@ namespace Assets.Scripts.Experiment
             if (this.Stage > 3)
             {
                 this.Finished = true;
-                foreach (ExperimentObserver obs in this._observers) { obs.onFinish(time, headMovement, correctAnswer); }
+                foreach (ExperimentObserver obs in this._observers) { obs.onFinish(time, headMovement); }
             }
             else
             {
-                foreach (ExperimentObserver obs in this._observers) { obs.onStageChange(time, headMovement, correctAnswer); }
+                foreach (ExperimentObserver obs in this._observers) { obs.onStageChange(time, headMovement); }
             }
             this.Paused = true;
         }
@@ -196,9 +209,13 @@ namespace Assets.Scripts.Experiment
         {
             //Get metrics
             float time = this.MaxTime - this.TimeLeft;
-            //TODO: Get head movement and correct anwser
+            //TODO: Get head movement
             float headMovement = 0f;
-            bool correctAnswer = (_answer == ExperimentAnswer.NO_ANSWER)?false:true; //Check if the given answer is correct
+            bool correctAnswer;
+            if (_answer == ExperimentAnswer.NO_ANSWER) correctAnswer = false; //No answer = no correct answer
+            else if (_answer == ExperimentAnswer.POSITIVE) //Only correct if the solution is true
+                correctAnswer = _solution;
+            else correctAnswer = !_solution; //Only correct if the solution is false
 
             //Log results
             ExperimentLogger.Log(this.Id,this.Stage,this.Challenge,time,headMovement,correctAnswer);
@@ -216,7 +233,7 @@ namespace Assets.Scripts.Experiment
                 this.TimeLeft = MaxTime;
                 this.Paused = false;
                 _answer = ExperimentAnswer.NO_ANSWER;
-                foreach (ExperimentObserver obs in this._observers) { obs.onChallengeChange(time,headMovement,correctAnswer); }
+                foreach (ExperimentObserver obs in this._observers) { obs.onChallengeChange(time,headMovement);}
             }     
         }
 
@@ -232,9 +249,12 @@ namespace Assets.Scripts.Experiment
         private bool _paused;
         //Experiment is finished
         private bool _finished;
+        //Current solution
+        private bool _solution;
         //Current answer
         private ExperimentAnswer _answer;
         //List of observers
         private List<ExperimentObserver> _observers = new List<ExperimentObserver>();
+
     }
 }
