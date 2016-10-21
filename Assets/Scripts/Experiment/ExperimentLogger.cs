@@ -9,6 +9,7 @@ namespace Assets.Scripts.Experiment
     class ExperimentLogger
     {
         private const string logFile = "Assets/Data/results.csv";
+        private const string idFile = "Assets/Data/id.txt";
 
         public static string Log(params object[] data)
         {
@@ -42,6 +43,17 @@ namespace Assets.Scripts.Experiment
             sb.Append(data[data.Length - 1].ToString());
             string s = sb.ToString();
             return s;
+        }
+
+        public static Tuple<long, int> loadId()
+        {
+            using (TextReader reader = File.OpenText(idFile))
+            {
+                long id = long.Parse(reader.ReadLine());
+                int numCorrect = int.Parse(reader.ReadLine());
+
+                return new Tuple<long, int>(id, numCorrect);
+            }
         }
     }
 }

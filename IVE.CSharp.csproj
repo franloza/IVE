@@ -72,8 +72,10 @@
     <Compile Include="Assets\Scripts\Link.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
+    <Compile Include="Assets\Scripts\Tuple.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Data\id.txt" />
     <None Include="Assets\Prefabs\LinkShader.shader" />
     <None Include="Assets\Prefabs\NodeShader.shader" />
   </ItemGroup>

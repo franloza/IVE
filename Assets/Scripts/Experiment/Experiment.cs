@@ -104,7 +104,7 @@ namespace Assets.Scripts.Experiment
             }
         }
 
-        public int Id
+        public long Id
         {
             get
             {
@@ -146,7 +146,7 @@ namespace Assets.Scripts.Experiment
         //PUBLIC METHODS
         public void update()
         {
-            if (!this.Paused)
+            if (!this.Paused) 
             {
                 this.TimeLeft -= Time.deltaTime;
                 //Go to the next challange if the time is over
@@ -164,19 +164,23 @@ namespace Assets.Scripts.Experiment
             this.TimeLeft = MaxTime;
             this.Finished = false;
             this.Paused = false;
-            this.NumCorrect = 0;
             _answer = ExperimentAnswer.NO_ANSWER;
             foreach (ExperimentObserver obs in this._observers) { obs.onStart(); }
         }
 
         public void reset()
         {
-            this.Stage = 1;
+            this.Stage = 2;
             this.Challenge = 1;
             this.TimeLeft = MaxTime;
             this.Finished = false;
             this.Paused = true;
-            this.Id = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; 
+
+            Tuple<long, int> tuple = ExperimentLogger.loadId();
+            this.Id = tuple.First;
+            this.NumCorrect = tuple.Second;
+             
+
             _answer = ExperimentAnswer.NO_ANSWER;
             foreach (ExperimentObserver obs in this._observers) { obs.onReset(); }
         }
@@ -254,7 +258,7 @@ namespace Assets.Scripts.Experiment
         }
 
         //ATTRIBUTES
-        private int _id;
+        private long _id;
         //Stage number (1..3)
         private int _stage;
         //Challenge number (1..3)

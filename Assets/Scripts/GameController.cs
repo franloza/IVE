@@ -215,6 +215,8 @@ namespace Topology {
 
         void Update()
         {
+            if (exp == null) return;
+
             //Left click - Positive answer
             if (Input.GetMouseButtonDown(0) && !exp.Paused) exp.answer(true);
             //Right click - Negative answer
