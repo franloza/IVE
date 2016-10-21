@@ -171,18 +171,18 @@ namespace Topology {
                 case 1:
                     numNodes = 20;
                     minDegree = 2;
-                    maxDegree = 5;
+                    maxDegree = 3;
                     break;
 
                 case 2:
-                    numNodes = 30;
-                    minDegree = 3;
-                    maxDegree = 5;
+                    numNodes = 25;
+                    minDegree = 2;
+                    maxDegree = 4;
                     break;
 
                 case 3:
-                    numNodes = 40;
-                    minDegree = 4;
+                    numNodes = 30;
+                    minDegree = 2;
                     maxDegree = 5;
                     break;
 
@@ -190,7 +190,7 @@ namespace Topology {
                     throw new ArgumentException();
             }
 
-            float scale = 100.0f;
+            float scale = 200.0f;
 
             return GenerateGraph(numNodes, minDegree, maxDegree, scale);
         }
@@ -230,22 +230,24 @@ namespace Topology {
         }
 
         //Events
-        public void onStageChange(float timeEmployed, float headMovement, bool correctAnswer)
+        public void onStageChange(float timeEmployed, float headMovement)
         {
             statusText.text = "Stage " + exp.Stage;
             instructions.text = "";
             warpKeys.text = "";
         }
 
-        public void onChallengeChange(float timeEmployed, float headMovement, bool correctAnswer)
+        public void onChallengeChange(float timeEmployed, float headMovement)
         {
             warpKeys.text = "Stage " + exp.Stage + " - Challenge " + exp.Challenge;
             timerText.text = "Time: " + exp.TimeLeft.ToString("0.00");
             bool path = GenerateExperimenGraph(exp.Challenge);
             statusText.text = "path: " + (path ? "yes" : "no");
+            //Set the solution
+            exp.Solution = path;
         }
 
-        public void onFinish(float timeEmployed, float headMovement, bool correctAnswer)
+        public void onFinish(float timeEmployed, float headMovement)
         {
             nodeCountText.text = "";
             linkCountText.text = "";
@@ -266,6 +268,8 @@ namespace Topology {
             //Creates the graph
             bool path = GenerateExperimenGraph(exp.Challenge);
             statusText.text = "path: " + (path ? "yes" : "no");
+            //Set the solution
+            exp.Solution = path;
         }
 
         public void onReset()
@@ -300,5 +304,4 @@ namespace Topology {
             throw new NotImplementedException();
         }
     }
-
 }

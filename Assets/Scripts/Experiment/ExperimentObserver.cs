@@ -7,9 +7,9 @@ namespace Assets.Scripts.Experiment
 {
     public interface ExperimentObserver
     {
-        void onStageChange(float time, float headMovement, bool correctAnswer);
-        void onChallengeChange(float time, float headMovement, bool correctAnswer);
-        void onFinish(float time, float headMovement, bool correctAnswer);
+        void onStageChange(float time, float headMovement);
+        void onChallengeChange(float time, float headMovement);
+        void onFinish(float time, float headMovement);
         void onStart();
         void onReset();
         void onUpdate();
