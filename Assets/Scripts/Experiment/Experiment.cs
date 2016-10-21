@@ -166,6 +166,7 @@ namespace Assets.Scripts.Experiment
             this.Paused = false;
             this.NumCorrect = 0;
             _answer = ExperimentAnswer.NO_ANSWER;
+            ExperimentLogger.logId(this.Id, this.NumCorrect);
             foreach (ExperimentObserver obs in this._observers) { obs.onStart(); }
         }
 

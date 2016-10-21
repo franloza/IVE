@@ -9,6 +9,8 @@ namespace Assets.Scripts.Experiment
     class ExperimentLogger
     {
         private const string logFile = "Assets/Data/results.csv";
+        private const string idFile = "Assets/Data/id.txt";
+
 
         public static string Log(params object[] data)
         {
@@ -28,6 +30,22 @@ namespace Assets.Scripts.Experiment
             log.Close();
 
             return s;
+        }
+
+        public static void logId (long id, int numCorrect)
+        {
+            //Write to file
+            StreamWriter log;
+            if (File.Exists(idFile))
+            {
+                File.Delete(idFile);
+            }
+
+            log = new StreamWriter(idFile);
+            log.WriteLine(id);
+            log.WriteLine(numCorrect);
+
+            log.Close();
         }
 
         private static string formatString(params object[] data)

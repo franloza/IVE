@@ -223,7 +223,18 @@ namespace Topology {
             else if (Input.GetKeyDown("space"))
             {
                 if (exp.Finished) exp.reset();
-                else if (exp.Paused) exp.start();
+                else if (exp.Paused)
+                {
+                    if (exp.Stage == 2)
+                    {
+                        ExperimentLogger.logId(exp.Id, exp.NumCorrect);
+                        exp.reset();
+                    }
+                    else
+                    {
+                        exp.start();
+                    }
+                }
             }
 
             exp.update();
@@ -233,7 +244,7 @@ namespace Topology {
         public void onStageChange(float timeEmployed, float headMovement)
         {
             ClearGraph();
-            statusText.text = "Stage " + exp.Stage;
+            statusText.text = "Non-VR part finished\nswitch to VR part for stage 2 and 3";
             instructions.text = "";
             warpKeys.text = "";
         }
