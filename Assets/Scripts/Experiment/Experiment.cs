@@ -164,7 +164,7 @@ namespace Assets.Scripts.Experiment
             this.TimeLeft = MaxTime;
             this.Finished = false;
             this.Paused = false;
-            this.NumCorrect = 0;
+            
             _answer = ExperimentAnswer.NO_ANSWER;
             ExperimentLogger.logId(this.Id, this.NumCorrect);
             foreach (ExperimentObserver obs in this._observers) { obs.onStart(); }
@@ -173,6 +173,7 @@ namespace Assets.Scripts.Experiment
         public void reset()
         {
             this.Stage = 1;
+            this.NumCorrect = 0;
             this.Challenge = 1;
             this.TimeLeft = MaxTime;
             this.Finished = false;
