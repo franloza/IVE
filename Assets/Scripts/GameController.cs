@@ -232,6 +232,7 @@ namespace Topology {
         //Events
         public void onStageChange(float timeEmployed, float headMovement)
         {
+            ClearGraph();
             statusText.text = "Stage " + exp.Stage;
             instructions.text = "";
             warpKeys.text = "";
@@ -242,16 +243,17 @@ namespace Topology {
             warpKeys.text = "Stage " + exp.Stage + " - Challenge " + exp.Challenge;
             timerText.text = "Time: " + exp.TimeLeft.ToString("0.00");
             bool path = GenerateExperimenGraph(exp.Challenge);
-            statusText.text = "path: " + (path ? "yes" : "no");
+            //statusText.text = "path: " + (path ? "yes" : "no");
             //Set the solution
             exp.Solution = path;
         }
 
         public void onFinish(float timeEmployed, float headMovement)
         {
+            ClearGraph();
             nodeCountText.text = "";
             linkCountText.text = "";
-            statusText.text = "Experiment finished";
+            statusText.text = "Experiment finished\nCorrect answers: " + exp.NumCorrect + "/9.";
             visualReduction.enabled = exp.VisualReduction ? true : false;
             timerText.text = "";
             warpKeys.text = "";
@@ -267,7 +269,7 @@ namespace Topology {
             visualReduction.enabled = exp.VisualReduction ? true : false;
             //Creates the graph
             bool path = GenerateExperimenGraph(exp.Challenge);
-            statusText.text = "path: " + (path ? "yes" : "no");
+            //statusText.text = "path: " + (path ? "yes" : "no");
             //Set the solution
             exp.Solution = path;
         }

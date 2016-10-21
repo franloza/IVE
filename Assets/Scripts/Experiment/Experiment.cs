@@ -130,6 +130,19 @@ namespace Assets.Scripts.Experiment
             }
 }
 
+        public int NumCorrect
+        {
+            get
+            {
+                return _numCorrect;
+            }
+
+            private set
+            {
+                _numCorrect = value;
+            }
+        }
+
         //PUBLIC METHODS
         public void update()
         {
@@ -151,6 +164,7 @@ namespace Assets.Scripts.Experiment
             this.TimeLeft = MaxTime;
             this.Finished = false;
             this.Paused = false;
+            this.NumCorrect = 0;
             _answer = ExperimentAnswer.NO_ANSWER;
             foreach (ExperimentObserver obs in this._observers) { obs.onStart(); }
         }
@@ -217,6 +231,8 @@ namespace Assets.Scripts.Experiment
                 correctAnswer = _solution;
             else correctAnswer = !_solution; //Only correct if the solution is false
 
+            this.NumCorrect += correctAnswer ? 1 : 0;
+
             //Log results
             ExperimentLogger.Log(this.Id,this.Stage,this.Challenge,time,headMovement,correctAnswer);
 
@@ -243,6 +259,8 @@ namespace Assets.Scripts.Experiment
         private int _stage;
         //Challenge number (1..3)
         private int _challenge;
+        //Number of correct answers
+        private int _numCorrect;
         //Countdown timer 
         private float _timeLeft;
         //Experiment is paused

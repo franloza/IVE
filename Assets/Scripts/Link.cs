@@ -35,16 +35,16 @@ namespace Topology {
 		private LineRenderer lineRenderer;
 
 		void Start () {
-			lineRenderer = gameObject.AddComponent<LineRenderer>();
+            lineRenderer = gameObject.GetComponent<LineRenderer>();
 
 			// Properties
 			Color c = Color.white;
 			c.a = 1.0f;
             float w = 1;
 
-			//draw line
-			lineRenderer.material = new Material (Shader.Find("Self-Illumin/Diffuse"));
-			lineRenderer.material.SetColor ("_Color", c);
+            //draw line
+            //lineRenderer.material = new Material(Shader.Find("Self-Illumin/Diffuse"));
+		    //lineRenderer.material.SetColor ("_Color", c);
 			lineRenderer.SetWidth(w, w);
 			lineRenderer.SetVertexCount(2);
 			lineRenderer.SetPosition(0, new Vector3(0,0,0));
