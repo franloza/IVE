@@ -247,6 +247,9 @@ namespace Topology {
             statusText.text = "Non-VR part finished\nswitch to VR part for stage 2 and 3";
             instructions.text = "";
             warpKeys.text = "";
+
+            ExperimentLogger.logId(exp.Id, exp.NumCorrect);
+            exp.NumCorrect = 0;
         }
 
         public void onChallengeChange(float timeEmployed, float headMovement)

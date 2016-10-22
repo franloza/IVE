@@ -137,7 +137,7 @@ namespace Assets.Scripts.Experiment
                 return _numCorrect;
             }
 
-            private set
+            set
             {
                 _numCorrect = value;
             }
@@ -166,14 +166,14 @@ namespace Assets.Scripts.Experiment
             this.Paused = false;
             
             _answer = ExperimentAnswer.NO_ANSWER;
-            ExperimentLogger.logId(this.Id, this.NumCorrect);
+            
             foreach (ExperimentObserver obs in this._observers) { obs.onStart(); }
         }
 
         public void reset()
         {
             this.Stage = 1;
-            this.NumCorrect = 0;
+           
             this.Challenge = 1;
             this.TimeLeft = MaxTime;
             this.Finished = false;
