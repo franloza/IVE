@@ -143,12 +143,26 @@ namespace Assets.Scripts.Experiment
             }
         }
 
+        public float Movement
+        {
+            get
+            {
+                return _movement;
+            }
+
+            set
+            {
+                _movement = value;
+            }
+        }
+
         //PUBLIC METHODS
         public void update()
         {
             if (!this.Paused) 
             {
                 this.TimeLeft -= Time.deltaTime;
+
                 //Go to the next challange if the time is over
                 if (this.TimeLeft < 0.001)
                 {
@@ -164,6 +178,7 @@ namespace Assets.Scripts.Experiment
             this.TimeLeft = MaxTime;
             this.Finished = false;
             this.Paused = false;
+            this.Movement = 0;
             _answer = ExperimentAnswer.NO_ANSWER;
             foreach (ExperimentObserver obs in this._observers) { obs.onStart(); }
         }
@@ -227,8 +242,6 @@ namespace Assets.Scripts.Experiment
         {
             //Get metrics
             float time = this.MaxTime - this.TimeLeft;
-            //TODO: Get head movement
-            float headMovement = 0f;
             bool correctAnswer;
             if (_answer == ExperimentAnswer.NO_ANSWER) correctAnswer = false; //No answer = no correct answer
             else if (_answer == ExperimentAnswer.POSITIVE) //Only correct if the solution is true
@@ -238,7 +251,7 @@ namespace Assets.Scripts.Experiment
             this.NumCorrect += correctAnswer ? 1 : 0;
 
             //Log results
-            ExperimentLogger.Log(this.Id,this.Stage,this.Challenge,time,headMovement,correctAnswer);
+            ExperimentLogger.Log(this.Id,this.Stage,this.Challenge,time,Movement,correctAnswer);
 
             this.Paused = true;
             this.Challenge++;
@@ -246,14 +259,15 @@ namespace Assets.Scripts.Experiment
             if (this.Challenge > 3)
             {
                 this.Challenge = 1;
-                nextStage(time,headMovement,correctAnswer);
+                nextStage(time, Movement, correctAnswer);
             }
             else
             {
                 this.TimeLeft = MaxTime;
                 this.Paused = false;
+                this.Movement = 0;
                 _answer = ExperimentAnswer.NO_ANSWER;
-                foreach (ExperimentObserver obs in this._observers) { obs.onChallengeChange(time,headMovement);}
+                foreach (ExperimentObserver obs in this._observers) { obs.onChallengeChange(time,Movement);}
             }     
         }
 
@@ -263,6 +277,8 @@ namespace Assets.Scripts.Experiment
         private int _stage;
         //Challenge number (1..3)
         private int _challenge;
+        //Head movement
+        private float _movement;
         //Number of correct answers
         private int _numCorrect;
         //Countdown timer 
@@ -277,6 +293,5 @@ namespace Assets.Scripts.Experiment
         private ExperimentAnswer _answer;
         //List of observers
         private List<ExperimentObserver> _observers = new List<ExperimentObserver>();
-
     }
 }

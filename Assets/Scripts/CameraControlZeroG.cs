@@ -26,7 +26,7 @@ public class CameraControlZeroG : MonoBehaviour {
 
 	public float speed = 5f;
 
-	//private Vector3 move = new Vector3();
+	private Vector3 move = new Vector3();
 
 	void Start(){
 		//set to first cluster position
@@ -35,14 +35,14 @@ public class CameraControlZeroG : MonoBehaviour {
 	
 	void Update () {
 
-        /*
+      
 		move.x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 		move.z = Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
 		move.y = 0;
-		if (Input.GetKey ("space")) {
+		/*if (Input.GetKey ("space")) {
 			move.y = speed * Time.deltaTime;
-		}
+		}*/
 
 
 		if (Input.GetKey ("left ctrl")) {
@@ -55,6 +55,6 @@ public class CameraControlZeroG : MonoBehaviour {
 			speed = 5;
 
 		move = transform.TransformDirection(move);
-		transform.position += move;*/
+		transform.position += move;
     }
 }

@@ -49,6 +49,8 @@ namespace Topology {
         private GUIText warpKeys;
         private Canvas visualReduction;
 
+        private Vector3 oldPos;
+
         // Destroys gameobjects and clears the representation of the graph (hashtables)
         void ClearGraph()
         {
@@ -208,7 +210,7 @@ namespace Topology {
             instructions = GameObject.Find("Instructions").GetComponent<GUIText>();
             warpKeys = GameObject.Find("WarpKeys").GetComponent<GUIText>();
             timerText = GameObject.Find("Timer").GetComponent<GUIText>();
-
+            oldPos = Camera.main.transform.position;
             //Subscribe to the experiment
             exp.subscribe(this);
         }
@@ -227,7 +229,9 @@ namespace Topology {
                 if (exp.Finished) exp.reset();
                 else if (exp.Paused) exp.start();
             }
-
+            exp.Movement += (Vector3.Distance(oldPos, Camera.main.transform.position));
+            oldPos = Camera.main.transform.position;
+            linkCountText.text = exp.Movement.ToString();
             exp.update();
         }
 
