@@ -1,0 +1,47 @@
+ids = results2(1)
+ids
+ids = results2(1,:)
+ids = results2(:,)
+ids = results2(:,1)
+ids
+Challenge
+Id
+CorrectAnswer
+CorrectAnswer(Stage==2)
+CorrectAnswer(Stage==1)
+sum(CorrectAnswer(Stage==1))
+sum(CorrectAnswer(Stage==2))
+sum(CorrectAnswer(Challenge==2))
+sum(CorrectAnswer(Challenge==1))
+sum(CorrectAnswer(Stage==2))
+sum(CorrectAnswer(Stage==1))
+sum(CorrectAnswer(Challenge==1))
+sum(CorrectAnswer(Challenge==2))
+sum(CorrectAnswer(Challenge==3))
+avg(Time(Stage==1)
+mean(Time(Stage==1)
+mean(Time(Stage==1))
+mean(Time(Stage==2))
+mean(Time(CorrectAnswer==1))
+mean(Time(CorrectAnswer==0))
+mean(Time(CorrectAnswer==0 && Stage=1))
+mean(Time(CorrectAnswer==0 & Stage=1))
+mean(Time(CorrectAnswer==0 & Stage==1))
+mean(Time(CorrectAnswer==0 && Stage==1))
+mean(Time(CorrectAnswer==0 & Stage==1))
+mean(Time(CorrectAnswer==0 & Stage==2))
+mean(Time(CorrectAnswer==1 & Stage==1))
+mean(Time(CorrectAnswer==1 & Stage==2))
+boxplot(Time)
+boxplot(Time(Stage==1))
+hold on;
+boxplot(Time(Stage==2))
+boxplot(1,Time(Stage==2))
+figure;
+subplot(2,1,1)
+boxplot(Time(Stage==1))
+figure;
+subplot(1,2,1)
+boxplot(Time(Stage==1))
+subplot(1,2,2)
+boxplot(Time(Stage==2))
