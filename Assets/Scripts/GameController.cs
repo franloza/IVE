@@ -138,7 +138,7 @@ namespace Topology {
             }
 
             // Remove unconnected vertices
-            for (int i = 0; i < numNodes / 2; ++i)
+            for (int i = (path ? 1 : 0); i < numNodes / 2; ++i)
             {
                 if (!connected[i])
                 {
