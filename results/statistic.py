@@ -28,9 +28,10 @@ for i in range (1,4):
     errorNVR = novr['Correct Answer'].loc[(novr['Correct Answer'] == 0) & (novr['Challenge'] == i)].count() / novr['Correct Answer'].loc[novr['Challenge'] == i].count()
     errorVR = vr['Correct Answer'].loc[(vr['Correct Answer'] == 0) & (vr['Challenge'] == i)].count() / vr['Correct Answer'].loc[vr['Challenge'] == i].count()
     df.xs('Challenge ' + str(i))[:] = [errorNVR,errorVR]
-#fig = df.plot.bar()
-#fig.set_ylabel("Error rate") 
-#fig.set_title("Error rate per challenge") 
+fig = df.plot.bar()
+fig.set_ylabel("Error rate") 
+fig.set_title("Error rate per challenge") 
+plt.show()
 
 # Mean time for answering Non-VR vs VR per challenge and total
 #   No VR
