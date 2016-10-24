@@ -237,7 +237,7 @@ namespace Topology {
 
         //Events
         public void onStageChange(float timeEmployed, float headMovement)
-        {
+        { 
             ClearGraph();
             statusText.text = "Stage " + exp.Stage;
             instructions.text = "";
@@ -259,7 +259,7 @@ namespace Topology {
             ClearGraph();
             nodeCountText.text = "";
             linkCountText.text = "";
-            statusText.text = "Experiment finished\nCorrect answers: " + exp.NumCorrect + "/9.";
+            statusText.text = "Experiment finished\nCorrect answers: " + exp.NumCorrect + "/6.";
             visualReduction.enabled = exp.VisualReduction ? true : false;
             timerText.text = "";
             warpKeys.text = "";

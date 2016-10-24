@@ -226,7 +226,7 @@ namespace Assets.Scripts.Experiment
         private void nextStage(float time, float headMovement, bool correctAnswer)
         {
             this.Stage++;
-            if (this.Stage > 3)
+            if (this.Stage > 2)
             {
                 this.Finished = true;
                 foreach (ExperimentObserver obs in this._observers) { obs.onFinish(time, headMovement); }
