@@ -1,0 +1,28 @@
+Error rate Non-VR vs VR
+========================================
+Percentage of correct anwsers without VR: 60.47%
+Error rate without VR: 0.40
+Percentage of correct anwsers with VR: 68.89%
+Error rate with VR: 0.31
+
+Mean time for answering Non-VR vs VR
+========================================
+Mean time for answering without VR: 7.8105
+        * Complexity 1: 6.7629
+        * Complexity 2: 6.6055
+        * Complexity 3: 9.9129
+Mean time for answering with VR: 7.8829
+        * Complexity 1: 7.0211
+        * Complexity 2: 7.8917
+        * Complexity 3: 8.7359
+
+Mean head movement using VR per complexity
+========================================
+Mean movement for complexity 1: 90.6629
+Mean movement for complexity 2: 91.9106
+Mean movement for complexity 3: 141.4372
+
+Mean head movement using VR per answer type
+========================================
+Mean movement for incorrect answers: 89.4108
+Mean movement for correct answers: 116.4003
