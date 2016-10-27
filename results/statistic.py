@@ -101,3 +101,8 @@ ax.set_ylabel("Head movement (relative)")
 ax.set_xlabel("Answer type")
 plt.show()
 plt.clf()
+
+#Scatter plot Time - Head Movement
+df.plot(kind='scatter',x='Time',y='Head Movement')
+plt.show()
+plt.clf
