@@ -23,14 +23,14 @@ print ("Percentage of correct anwsers with VR: {0:.2f}%".format(percentage))
 print ("Error rate with VR: {0:.2f}\n".format(error))
 
 # Plot error rate evolution according to complexity
-df = pd.DataFrame(np.nan, index=['Challenge 1','Challenge 2','Challenge 3'], columns=['No VR','VR'])
+df = pd.DataFrame(np.nan, index=['Complexity 1','Complexity 2','Complexity 3'], columns=['No VR','VR'])
 for i in range (1,4):
     errorNVR = novr['Correct Answer'].loc[(novr['Correct Answer'] == 0) & (novr['Challenge'] == i)].count() / novr['Correct Answer'].loc[novr['Challenge'] == i].count()
     errorVR = vr['Correct Answer'].loc[(vr['Correct Answer'] == 0) & (vr['Challenge'] == i)].count() / vr['Correct Answer'].loc[vr['Challenge'] == i].count()
-    df.xs('Challenge ' + str(i))[:] = [errorNVR,errorVR]
+    df.xs('Complexity ' + str(i))[:] = [errorNVR,errorVR]
 fig = df.plot.bar()
 fig.set_ylabel("Error rate") 
-fig.set_title("Error rate per challenge") 
+fig.set_title("Error rate per complexity") 
 plt.show()
 
 # Mean time for answering Non-VR vs VR per challenge and total
