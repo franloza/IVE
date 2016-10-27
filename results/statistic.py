@@ -58,7 +58,7 @@ for i in range (1,4):
     df2 ["Compl. "+str(i)] = column
 df2["VR Support"] = 'VR'
 df = df.append(df2)
-axes = df.groupby('VR Support').boxplot(return_type='axes')
+axes = df.groupby('VR Support').boxplot(return_type='axes',showmeans=True)
 for i in range (1,3):
     ax = axes.popitem()
     ax[1].set_ylabel("Response time (seconds)")
@@ -75,8 +75,8 @@ for i in range (1,4):
     column = column['Head Movement']
     print ("Mean movement for complexity "+ str(i) + ": {0:.4f}".format(column.mean()))
     df ["Complexity "+str(i)] = column
-ax = df.boxplot(return_type='axes')
-ax.set_title("Mean head movement using VR per complexity")
+ax = df.boxplot(return_type='axes',showmeans=True)
+ax.set_title("Head movement using VR per complexity")
 ax.set_ylabel("Head movement (relative)")
 plt.show()
 plt.clf()
@@ -95,8 +95,8 @@ column = column['Head Movement']
 print ("Mean movement for correct answers: {0:.4f}".format(column.mean()))
 df ["Correct"] = column
 
-ax = df.boxplot(return_type='axes')
-ax.set_title("Mean head movement using VR per answer type")
+ax = df.boxplot(return_type='axes',showmeans=True)
+ax.set_title("Head movement using VR per answer type")
 ax.set_ylabel("Head movement (relative)")
 ax.set_xlabel("Answer type")
 plt.show()
