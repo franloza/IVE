@@ -16,10 +16,10 @@ Rinsma, Thomas
 
 ### Eindhoven University of Technology (TU/e)
 
-1. Problem statement and research questions
--------------------------------------------
+1. Introduction
+---------------
 
-The main goal for this project is to replicate one of the experiments carried out in the provided paper *Evaluating Stereo and Motion Cues for Visualizing Information Nets in Three Dimensions*. This experiment consists of analyzing the difference between user comprehension of network graphs (1) in 2D versus 3D and (2) with and without head-tracking. This difference will be measured by having the user perform a simple task and recording several metrics such as timing and error rate. As a result of the experiment, we hope to be able to make conclusions about whether 3D vision and/or (lack of) head-tracking is better for the comprehension of visualized graphs.
+The main goal for this project is to replicate one of the experiments carried out in the provided paper *Evaluating Stereo and Motion Cues for Visualizing Information Nets in Three Dimensions \[1\]*. This experiment consists of analyzing the difference between user comprehension of network graphs (1) in 2D versus 3D and (2) with and without head-tracking. This difference will be measured by having the user perform a simple task and recording several metrics such as timing and error rate. As a result of the experiment, we hope to be able to make conclusions about whether 3D vision and/or (lack of) head-tracking is better for the comprehension of visualized graphs.
 
 In addition to the metrics proposed in the experiment, we will try to gain more insight of the effects of 3D vision and head-tracking by measuring additional metrics such us the distance traversed or the amount rotated by the head or the distance that the subject traverses inside the virtual environment. The purpose of these additional metrics is to test whether or not there exists a correlation between the complexity of the graph and the amount of movement that is required for the subject to comprehend it.
 
@@ -43,17 +43,27 @@ The questions that we will try to give answer to are the following ones:
 
 -   How similar are the obtained results to those in the original paper?
 
+Therefore, we will try to provide quantitative measures that could prove how much more a graph can be understood in 3D with respect to 2D. At the end of the report, we should give strong reasons about if using 3D graphics and virtual reality is a good combination to interact with information structures.
+
 2. Related work
 ---------------
+
+This experiment is an extension of the one proposed in the study *Evaluating Stereo and Motion Cues for Visualizing Information Nets in Three Dimensions.* Despite the paper of Ware and Franck is a good reference for comparing our conclusions with theirs., we must consider the context and the technology used for doing their experiment. This paper was published in 1996, when virtual reality started to be used in some applications but the technology was not very advanced in this area and a lot of research tried to show the possible future applications it may have in the next decade. The hardware used in the paper consisted of 3D LCD shutter glasses that provided the stereo vision and an ultrasonic head-tracking device embedded inside the frame of the glasses. The monitors used for the experiment ran at 120Hz and each eye received a 60Hz update rate using the shutter glasses.
+
+Of course, a great advanced in technology has happened since 1996, and twenty years later, more sophisticated technology is used, and this is an important factor that we cannot overlook. For our experiment, we use Oculus Rift Development Kit 2. This device has a resolution of 960x1080 per eye, a low-persistence OLED display, positional tracking and higher refresh rate that previous versions of Oculus Rift (Up to 75 Hz) and an external HDMI port \[2\].
+
+The difference in technology is one of the main differences between our experiment and Ware and Franck’s experiment. We introduced some differences in the conditions and the variables of the experiment. In the original paper, four different combinations in the type of visualization are carried out: 2D, 2D and head tracking, 3D and 3D and head tracking. However, in our experiment, only three conditions are tried: 2D, 3D and head tracking, and a combination of 3D, head tracking and partial visual reduction. This last condition could not be performed due to technical issues with the development framework and the time constraints of the experiment.
+
+Moreover, the variables taken into account for performing the experiment also changed. In the original paper, the number of nodes are varied to measure the error rate and the time employed by the subjects. They extract conclusions about performance using this metrics. On the other hand, we used a different approach for obtaining different results instead of the raw number of nodes and an abstraction called **complexity level** is used instead. This abstraction is made taken into account the number of nodes and the minimum and maximum degree that they may can have. This degree may vary among the define range but the number of nodes is fixed for each complexity level. Using different types of complexity levels, we tried to simulate different scenarios of complexity and how much does it affect to the error rate and employed time to comprehend the graph.
+
+Finally, the head movement is also taken into account. We use a distance metric provided by the Unity framework in a virtual space that allows us to compare among different amounts of movement. This variable is new respect of the original paper and it’s interesting to analyze because in may provide information about how head-tracking affects the behavior of the subjects and extract conclusions about it.
 
 3. Experiment
 -------------
 
 ### 3.1. General description
 
-The experiment that we are performing has a main purpose to collect relevant and consistent data from the Oculus Rift device and the subjects regarding the effects of stereoscopic vision and head tracking in the task of 3D graph comprehension. In addition, we will create a series of scenarios to retrieve data regarding to the effects of visual memory in 3D graph comprehension when the range of vision is reduced.
-
-This experiment is an extension of the one proposed in the study *Evaluating Stereo and Motion Cues for Visualizing Information Nets in Three Dimensions.* Whereas the effects of head tracking and 3D stereoscopic vision will be compared with the study, we will try to make some conclusions about the effects of visual memory on the performed task.
+The experiment has been design with the main purpose to collect relevant and consistent data from the Oculus Rift device and the subjects regarding the effects of stereoscopic vision and head tracking in the task of 3D graph comprehension. In addition, we will create a series of scenarios to retrieve data regarding to the effects of visual memory in 3D graph comprehension when the range of vision is reduced.
 
 The experiment will be composed of **three stages**. Each one will be composed of **three scenarios** according to the graph complexity**.** The description of each stage is the following one:
 
@@ -116,27 +126,29 @@ Results
 
 ### Transcription of the Thomas talk last presentation
 
-Error rate per complexity and condition
-
-<img src="./media/image1.png" width="271" height="245" />
+<img src="./media/image1.png" width="441" height="398" />
 
 We split it up the X axis in three complexity levels and the Y axis measures the error rate. The first thing interesting is that in the first and third complexity levels NO VR error rate is higher than VR. This is what we expected because VR should make easier the task of visualizing graphs but in the second complexity level is the other way round. We could not make a conclusion about this fact but if we take the mean of the percentage of correct answers, that is the inverse of the error rate, the percentage VR (68.89%) is slightly higher than the percentage without using VR (60.47%). This is not a big difference in performance, which is what we expected but may not be significant due to the lack of samples.
 
 Independently if we use VR or not, the error rate in the first complexity level is a lot higher than the other two complexity levels. This means the opposite of what we expected and what we found in the original paper. That’s it, the error rate should increase proportionally to the level of complexity. The explanation we give for this is that the subjects that visualize the graphs for the first time must get used to the device and the experiment and it takes time to do it. We could say that this was an issue caused by the lack of familiarity with the device and the experiment. On the other hand, this could be also a problem related to the lack of gathered examples.
 
-<img src="./media/image2.png" width="306" height="230" />
+<img src="./media/image2.png" width="463" height="347" />
 
 In this plot, we can see the amount of head movement in the Y axis. This is an interesting one because it wasn’t in the original paper. This is the total amount of head movement splitted it up in the cases when they made incorrect answers and correct answers. The amount of head movement increased a 30.19% percent for correct answer with respect incorrect answer. People that moves the head more to visualize the graph are more likely to do a correct answer. The head movement was measured using the movement of the camera in the virtual space in Unity units.
 
-<img src="./media/image3.png" width="300" height="225" />
+<img src="./media/image3.png" width="478" height="358" />
 
 In this plot we have again the head movement in the Y axis and the X axis is splited up in three complexity levels. Specially for the third complexity level, the mean of head movement is slightly higher than the others. This was expected because the experiment was set up such that people in higher complexity levels have a higher maximum amount of time and thus, if they have more time, they tend to move their heads and it results in a higher amount of head movement in total. You can see also that the variance is very high in the third complexity level because people really liked the sensation at this point of the experiment and they moved a lot.
 
-<img src="./media/image4.png" width="307" height="230" />
+<img src="./media/image4.png" width="513" height="384" />
 
 In these two box plots, we can see the response time in seconds in the Y axis, separated in VR and no VR and in the three complexity levels. We can see for both plots that the higher the graph complexity is, the is higher is the response time. This was of course expected because people have more time to make a decision because the maximum time is higher. We can also see that the variance if very high again for VR because people really liked the VR experience and some of them spent a lot of time.
 
 If we observe the means and we compare them, we can see they are both practically the same in VR and No VR and this is not what we expected. Again, this could happened because of the sample size.
+
+COMMENT THE FOLLOWING PLOT:
+
+<img src="./media/image5.png" width="589" height="531" />
 
 Appendix. Implementation
 ------------------------
@@ -146,3 +158,10 @@ For the implementation of this experiment, we will use Unity framework and Oculu
 The only interaction allowed with each scenario will be provided through the mouse. The subject will use the left mouse button to answer that the there exists a 2-length path between the highlighted nodes and the right mouse to give a negative answer. The rest of the interactions such as initiating the timer, change the scenarios or reduce the angle of vision will be than through the controller. No movement will be implemented inside the scenario.
 
 The graphs will be randomly generated for each scenario using some defined constants according to the level of complexity of the graph. Some of this constants will be the number of edges and nodes and the probability of generating a 2-length path between two points. The graph will be undirected, with white edges connecting blue nodes. The highlighted points will be drawn in red and the background of the scenario will be black to improve the visibility of the graph.
+
+References 
+-----------
+
+\[1\] Ware, C., & Franck, G. (1996). Evaluating stereo and motion cues for visualizing information nets in three dimensions. ACM Transactions on Graphics, 15(2)
+
+\[2\] Oculus Rift. (n.d.). Retrieved November 2, 2016, from https://en.wikipedia.org/wiki/Oculus\_Rift
