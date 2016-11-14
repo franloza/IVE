@@ -156,7 +156,21 @@ COMMENT THE FOLLOWING PLOT:
 
 Conclusions
 -----------
-This experiment led us to face several problems and to learn the right approach to analyze a research purpose. The main conclusion that we have is the difference of the results that we expected. We can explain with several reasons depending on the constraints and the beavhiours
+This experiment led us to face several problems and to learn the right approach to analyze a research purpose. The first conclusion that we draw, is the difference between the actual results and what we expected. We can explain this with several reasons depending on the constraints and the beavhiours of the subjects. 
+
+Analyzing the results statically, we could assert that the distortion from our expections could be due to a lack of data. This lack was not easy predictable in the beginning because of the uncertainties on the ideal set of subjects. 
+
+The second cause is that we dealt with a lack of time to run the final experiment because of the technical issues on the compatibility of the Oculus SDK and the Unity framework. This compelled us to submit the test to a little number of people. 
+
+Moreover the limited time affect the behaviors of the subjects. Some of them misenderstood the task to accomplish, influencing negatively the results or forcing us to discard the tests. On the other hand the subject that was able to accoplish the tasks increased his performances with the growth of the difficulty. This was an unpredictable training process not took into account. The second unexpected process was the liking of the subjects for the VR technologies that made them spending more time and paying more attention on the 2nd step of the experiment.
+
+Although the difficulties we derive general trustworthy conclusions from the data:
+- VR 3D vision with headtracking affects positively the visualizations of 3D graphs;
+- subjects prefer immersive environment and within it they obtain better performances.
+
+From the problems we faced we spreaded our knowledges not only about "computer" (Unity developing, Oculus Rift Hardware, Computer Graphics basics etc.) but especially about "science" (scientifical approach, experimental issues, recuiting subject, evaluating other experiments, being subjects of other groups etc.).
+
+Finally we thought about some possible applications of this results in case they are supported by a bigger number of data and a more solid scientific approach. This kind of experiment could be implemented in the diagnosis and the treatment of neurogical deseases and in the rehab processes measuring the level of the interactions of the patients and their improvements during the period. In this scenario would be also useful the third stage of our experiments that would try to analyze the effect on the visual memory of a restricted field of view.
 
 Appendix. Implementation
 ------------------------
