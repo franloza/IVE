@@ -62,8 +62,6 @@ Moreover, the variables taken into account for performing the experiment also ch
 
 Finally, the head movement is also taken into account. We use a distance metric provided by the Unity framework in a virtual space that allows us to compare among different amounts of movement. This variable is new respect of the original paper and it’s interesting to analyze because in may provide information about how head-tracking affects the behavior of the subjects and extract conclusions about it.
 
-What is more with the data extracted by Unity through the Oculus Rift hopefully we will be able to set a relation betwen the amount of head movement and the correction of the answer given. Also to decide if a more complex graph brings more head movement. If we could have performed the last condition, the one related with the vision reduction, the study of how much the head movement increases with this fram, or else with a smaller field of vision the subject will be confused using the headtracking.
-
 3. Experiment
 -------------
 
@@ -132,21 +130,13 @@ Results
 
 ### Transcription of the Thomas talk last presentation
 
-<img src="./media/image1.png" width="363" height="327" />
-
 We split it up the X axis in three complexity levels and the Y axis measures the error rate. The first thing interesting is that in the first and third complexity levels NO VR error rate is higher than VR. This is what we expected because VR should make easier the task of visualizing graphs but in the second complexity level is the other way round. We could not make a conclusion about this fact but if we take the mean of the percentage of correct answers, that is the inverse of the error rate, the percentage VR (68.89%) is slightly higher than the percentage without using VR (60.47%). This is not a big difference in performance, which is what we expected but may not be significant due to the lack of samples.
 
 Independently if we use VR or not, the error rate in the first complexity level is a lot higher than the other two complexity levels. This means the opposite of what we expected and what we found in the original paper. That’s it, the error rate should increase proportionally to the level of complexity. The explanation we give for this is that the subjects that visualize the graphs for the first time must get used to the device and the experiment and it takes time to do it. We could say that this was an issue caused by the lack of familiarity with the device and the experiment. On the other hand, this could be also a problem related to the lack of gathered examples.
 
-<img src="./media/image2.png" width="589" height="441" />
-
 In this plot, we can see the amount of head movement in the Y axis. This is an interesting one because it wasn’t in the original paper. This is the total amount of head movement splitted it up in the cases when they made incorrect answers and correct answers. The amount of head movement increased a 30.19% percent for correct answer with respect incorrect answer. People that moves the head more to visualize the graph are more likely to do a correct answer. The head movement was measured using the movement of the camera in the virtual space in Unity units.
 
-<img src="./media/image3.png" width="589" height="441" />
-
 In this plot we have again the head movement in the Y axis and the X axis is splited up in three complexity levels. Specially for the third complexity level, the mean of head movement is slightly higher than the others. This was expected because the experiment was set up such that people in higher complexity levels have a higher maximum amount of time and thus, if they have more time, they tend to move their heads and it results in a higher amount of head movement in total. You can see also that the variance is very high in the third complexity level because people really liked the sensation at this point of the experiment and they moved a lot.
-
-<img src="./media/image4.png" width="589" height="441" />
 
 In these two box plots, we can see the response time in seconds in the Y axis, separated in VR and no VR and in the three complexity levels. We can see for both plots that the higher the graph complexity is, the is higher is the response time. This was of course expected because people have more time to make a decision because the maximum time is higher. We can also see that the variance if very high again for VR because people really liked the VR experience and some of them spent a lot of time.
 
@@ -154,23 +144,16 @@ If we observe the means and we compare them, we can see they are both practicall
 
 COMMENT THE FOLLOWING PLOT:
 
-<img src="./media/image5.png" width="589" height="531" />
-
 Conclusions
 -----------
-This experiment led us to face several problems and to learn the right approach to analyze a research purpose. The first conclusion that we draw, is the difference between the actual results and what we expected. We can explain this with several reasons depending on the constraints and the beavhiours of the subjects. 
 
-Analyzing the results statistically, we could assert that the distortion from our expections could be due to a lack of data. This lack was not easy predictable in the beginning because of the uncertainties on the ideal set of subjects. 
+This experiment led us to face several problems and to learn the right approach to analyze a research purpose. The first conclusion that we draw is that the actual results are rather more different from the ones we expected. We can explain this due to several factors that depends both on the experiment constraints and the behavior of the subjects. Analyzing the results statistically, we assert that the distortion from our expections could be due to the small size of our dataset. This issue could not be foreseen at the beginning of the experiment because of the uncertainties on the ideal set of subjects, but it turned to be a problem at the end.
 
-The second cause is that we dealt with a lack of time to run the final experiment because of the technical issues on the compatibility of the Oculus SDK and the Unity framework. This compelled us to submit the test to a little number of people. 
+The second conclusion that Virtual Reality offers as many solutions as challenges to face. Dealing with the deadline for this experiment was very challenging because of the technical issues related to the compatibility of the Oculus SDK and the Unity framework. This compelled us to submit the test to a little number of people and limited our capacity to extract significant conclusions from the dataset.
 
-Moreover the limited time affect the behaviors of the subjects. Some of them misenderstood the task to accomplish, influencing negatively the results or forcing us to discard the tests. On the other hand the subject that was able to accoplish the tasks increased his performances with the growth of the difficulty. This was an unpredictable training process not took into account. The second unexpected process was the liking of the subjects for the VR technologies that made them spending more time and paying more attention on the 2nd step of the experiment.
+Moreover, the limited time affected the behaviors of the subjects. Some of them misenderstood the task to accomplish, influencing negatively the results or forcing us to discard the tests. On the other hand the subject that was able to accoplish the tasks increased his performances with the growth of the difficulty. This was an unpredictable training process that we didn’t take into account. The second unexpected process was the tendency of the subjects to expend more time to enjoy the VR experience, and not because of it helped in the comprehension of the graph, producing some distortions on the data
 
-Although the difficulties we derive general trustworthy conclusions from the data:
-- VR 3D vision with headtracking affects positively the visualizations of 3D graphs;
-- subjects prefer immersive environment and within it they obtain better performances.
-
-From the problems we faced we spreaded our knowledges not only about "computer" (Unity developing, Oculus Rift Hardware, Computer Graphics basics etc.) but especially about "science" (scientifical approach, experimental issues, recuiting subject, evaluating other experiments, being subjects of other groups etc.).
+Despite the difficulties, we have derived two conclusions from the data: VR and 3D vision with headtracking affects positively the visualizations of 3D graphs and subjects prefer immersive environment and within it they obtain better performances. Thanks to the problems we faced, we spreaded our knowledge not only about software development (Unity developing, Oculus Rift Hardware, Computer Graphics basics etc.) but especially about science (scientifically approach, experimental issues, recuiting subject, evaluating other experiments, being subjects of other groups etc.).
 
 Finally we thought about some possible applications of this results in case they are supported by a bigger number of data and a more solid scientific approach. This kind of experiment could be implemented in the diagnosis and the treatment of neurogical deseases and in the rehab processes measuring the level of the interactions of the patients and their improvements during the period. In this scenario would be also useful the third stage of our experiments that would try to analyze the effect on the visual memory of a restricted field of view.
 
