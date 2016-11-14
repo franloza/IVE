@@ -62,6 +62,8 @@ Moreover, the variables taken into account for performing the experiment also ch
 
 Finally, the head movement is also taken into account. We use a distance metric provided by the Unity framework in a virtual space that allows us to compare among different amounts of movement. This variable is new respect of the original paper and it’s interesting to analyze because in may provide information about how head-tracking affects the behavior of the subjects and extract conclusions about it.
 
+What is more with the data extracted by Unity through the Oculus Rift hopefully we will be able to set a relation betwen the amount of head movement and the correction of the answer given. Also to decide if a more complex graph brings more head movement. If we could have performed the last condition, the one related with the vision reduction, the study of how much the head movement increases with this fram, or else with a smaller field of vision the subject will be confused using the headtracking.
+
 3. Experiment
 -------------
 
