@@ -158,7 +158,7 @@ Conclusions
 -----------
 This experiment led us to face several problems and to learn the right approach to analyze a research purpose. The first conclusion that we draw, is the difference between the actual results and what we expected. We can explain this with several reasons depending on the constraints and the beavhiours of the subjects. 
 
-Analyzing the results statically, we could assert that the distortion from our expections could be due to a lack of data. This lack was not easy predictable in the beginning because of the uncertainties on the ideal set of subjects. 
+Analyzing the results statistically, we could assert that the distortion from our expections could be due to a lack of data. This lack was not easy predictable in the beginning because of the uncertainties on the ideal set of subjects. 
 
 The second cause is that we dealt with a lack of time to run the final experiment because of the technical issues on the compatibility of the Oculus SDK and the Unity framework. This compelled us to submit the test to a little number of people. 
 
