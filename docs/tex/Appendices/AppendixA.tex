@@ -1,0 +1,26 @@
+\chapter{Implementation}
+
+For the implementation of this experiment, we have used Unity framework
+and Oculus Rift SDK. A controller class was in charge of controlling the
+experiment flow across the different stages and scenarios. The
+controller contained an internal timer that controlled the remaining
+time for each scenario. The set of rules, such as maximum time and
+reduction of range of vision, used for each stage are stored in a data
+structure.
+
+The only interaction allowed with each scenario was provided through the
+mouse. The subject will use the left mouse button to answer that the
+there exists a 2-length path between the highlighted nodes and the right
+mouse to give a negative answer. The rest of the interactions such as
+initiating the timer, change the scenarios or reduce the angle of vision
+is done through the controller and no movement is implemented inside the
+scenario.
+
+The graphs were randomly generated for each scenario using some defined
+constants according to the level of complexity of the graph. Some of
+this constants were the number of edges and nodes and the probability of
+generating a 2-length path between two points. The graph was undirected,
+with white edges connecting blue nodes. The highlighted points were
+drawn in red and the background of the scenario will be black to improve
+the visibility of the graph. Finally, all the results collected were
+exported to a CSV file and analyzed using Python and matplotlib library.

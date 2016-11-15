@@ -1,0 +1,58 @@
+\lhead{\emph{Related Work}} 
+\chapter{Related Work}
+
+As we have mentioned in the previous section, this experiment is an
+extension of the one proposed in the study \emph{Evaluating Stereo and
+Motion Cues for Visualizing Information Nets in Three Dimensions.}
+Despite the paper of Ware and Franck is a good reference for comparing
+our conclusions with theirs, we must consider the context and the
+technology used for doing their experiment. This paper was published in
+1996, when virtual reality started to be used in some applications but
+the technology was not very advanced in this area and a lot of research
+tried to show the possible future applications it may have in the next
+decade. The hardware used in the paper consisted of 3D LCD shutter
+glasses that provided the stereo vision and an ultrasonic head-tracking
+device embedded inside the frame of the glasses. The monitors used for
+the experiment ran at 120Hz and each eye received a 60Hz update rate
+using the shutter glasses.
+
+Of course, a great advanced in technology has happened since 1996, and
+twenty years later, more sophisticated technology is used, and this is
+an important factor that we cannot overlook. For our experiment, we use
+Oculus Rift Development Kit 2. This device has a resolution of 960x1080
+per eye, a low-persistence OLED display, positional tracking and higher
+refresh rate that previous versions of Oculus Rift (Up to 75 Hz) and an
+external HDMI port.
+
+The difference in technology is one of the main differences between our
+experiment and Ware and Franck's experiment. We introduced some
+differences in the conditions and the variables of the experiment. In
+the original paper, four different combinations in the type of
+visualization are carried out: 2D, 2D and head tracking, 3D and 3D and
+head tracking. However, in our experiment, only three conditions are
+tried: 2D, 3D and head tracking, and a combination of 3D, head tracking
+and partial visual reduction. This last condition could not be performed
+due to technical issues with the development framework and the time
+constraints of the experiment.
+
+Moreover, the variables taken into account for performing the experiment
+also changed. In the original paper, the number of nodes are varied to
+measure the error rate and the time employed by the subjects. They
+extract conclusions about performance using this metrics. On the other
+hand, we used a different approach for obtaining different results
+instead of the raw number of nodes and an abstraction called
+\textbf{complexity level} is used instead. This abstraction is made
+taken into account the number of nodes and the minimum and maximum
+degree that they may can have. This degree may vary among the define
+range but the number of nodes is fixed for each complexity level. Using
+different types of complexity levels, we tried to simulate different
+scenarios of complexity and how much does it affect to the error rate
+and employed time to comprehend the graph.
+
+Finally, the head movement is also taken into account. We use a distance
+metric provided by the Unity framework in a virtual space that allows us
+to compare among different amounts of movement. This variable is new
+respect of the original paper and it's interesting to analyze because in
+may provide information about how head-tracking affects the behavior of
+the subjects and extract conclusions about it.
+

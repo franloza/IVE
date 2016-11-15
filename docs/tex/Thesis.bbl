@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ware and Franck(1996)]{ware1996evaluating}
+Colin Ware and Glenn Franck.
+\newblock Evaluating stereo and motion cues for visualizing information nets in
+  three dimensions.
+\newblock \emph{ACM Transactions on Graphics (TOG)}, 15\penalty0 (2), 1996.
+
+\end{thebibliography}
